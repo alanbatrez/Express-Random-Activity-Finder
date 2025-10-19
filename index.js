@@ -6,12 +6,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// GET → actividad aleatoria
+// GET actividad aleatoria
 app.get("/", async (req, res) => {
   try {
     const response = await axios.get("https://bored-api.appbrewery.com/random");
@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-// POST → actividades filtradas
+// POST actividades filtradas
 app.post("/", async (req, res) => {
   try {
     const { type, participants } = req.body;
